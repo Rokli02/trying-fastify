@@ -33,6 +33,9 @@ const findOneUserById = async (req: FastifyRequest, res: FastifyReply) => {
     return user;
   } catch (err) {
     console.error('Hiba egy darab user lekérésekor');
+    return res
+      .status(400)
+      .send({ message: 'Hiba egy darab user lekérésekor!' });
   }
 };
 
@@ -44,6 +47,9 @@ const insertOneUser = async (req: FastifyRequest, res: FastifyReply) => {
     return { _id };
   } catch (err) {
     console.error('Hiba történt új felhasználó beillesztése közben!');
+    return res
+      .status(400)
+      .send({ message: 'Hiba történt új felhasználó beillesztése közben!' });
   }
 };
 
@@ -55,7 +61,7 @@ const findByPageAndLimit = async (req: any, res: FastifyReply) => {
 
     if (1 > page) {
       return res.status(400).send({
-        message: 'A ${page}. oldal nem létezik, minimális oldalszám: 1!',
+        message: `A ${page}. oldal nem létezik, minimális oldalszám: 1!`,
       });
     }
 
@@ -78,6 +84,9 @@ const findByPageAndLimit = async (req: any, res: FastifyReply) => {
     return { users, pages };
   } catch (err) {
     console.error('Hiba történt új felhasználó beillesztése közben!');
+    return res
+      .status(400)
+      .send({ message: 'Hiba történt új felhasználó beillesztése közben!' });
   }
 };
 
